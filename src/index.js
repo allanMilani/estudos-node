@@ -77,19 +77,19 @@ app.put('/todos/:id', checksExistsUserAccount, checksExistsUserTodo, (request, r
     const { title, deadline } = request.body;
     todo.title = title;
     todo.deadline = new Date(deadline);
-    return response.status(201).send();
+    return response.json(todo);
 });
 
 app.patch('/todos/:id/done', checksExistsUserAccount, checksExistsUserTodo, (request, response) => {
     const { todo } = request;
     todo.done = true;
-    return response.status(201).send();
+    return response.json(todo);
 });
 
 app.delete('/todos/:id', checksExistsUserAccount, checksExistsUserTodo, (request, response) => {
     const { user, todo } = request;
     user.todos.splice(todo, 1);
-    return response.status(201).send();
+    return response.status(204).send();
 });
 
 module.exports = app;
